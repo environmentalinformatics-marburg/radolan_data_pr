@@ -28,18 +28,17 @@ for (month in 1:month) {
 ############# Step 2 ###################
 # Aufrufen des zweiten Skripts mit Parametern Skript2.R
 source(file.path(main_directory, "01_extractRadolan.R"))
-datapath <- "D:/radolan"
-process_RADOLAN_data(datapath, year, month)
+# datapath <- "D:/radolan"
+process_RADOLAN_data(main_directory, year, month)
 
 ############# Step 3 ###################
 # Aufrufen des zweiten Skripts mit Parametern Skript3.R
 source(file.path(main_directory, "02_combineRadolan.R"))
 # Define paths and variables
 RadolanPath <-file.path(main_directory, "results")
-outpath = main_directory
 combine_RADOLAN_data(RadolanPath, main_directory)
 
 ############# Step 4 ###################
 # Aufrufen des zweiten Skripts mit Parametern Skript4.R
 source(file.path(main_directory, "04_reformat_for_DB.R"))
-format_radolan_for_database("D:/radolan") 
+format_radolan_for_database(main_directory) 
