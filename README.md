@@ -42,3 +42,7 @@ Parameters:
 main_directory: The main directory containing the combined Radolan data.
 Automation via Windows Task Scheduler
 To ensure that the data processing is performed automatically each month, a batch script (run_RADOLAN.bat) is created to execute the R script (run_RADOLAN.R) with the required parameters. The Task Scheduler in Windows is used to run this batch script on a monthly schedule.
+
+Setup Requirements for Running main.R
+To execute or start main.R, ensure the following directory structure and files are present locally. For security reasons, these files are not uploaded to GitHub. For questions, please contact the script author or refer to the DFG project Exploratorien.
+Ensure the Plots directory contains the necessary shape_file.shp for plot information and a validationData directory with required CSV files for plotting purposes.
