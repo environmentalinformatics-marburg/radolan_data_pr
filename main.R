@@ -30,11 +30,11 @@ if (monthEnd == "" || monthEnd == 0) {
 }
 
 # Define parameters for function call
-#ftp_root <- "ftp://opendata.dwd.de/climate_environment/CDC/"
-#year = 2024
-#monthEnd = 6
-#main_directory <- "D:/radolan"
-#monthStart = 6
+ftp_root <- "ftp://opendata.dwd.de/climate_environment/CDC/"
+year = 2024
+monthEnd = 6
+main_directory <- "D:/radolan_data_pr"
+monthStart = 1
 
 ############# Step 1 ###################
 # Load function from script Skript1.R
@@ -69,39 +69,55 @@ for (month in monthStart:monthEnd) {
   format_radolan_for_database(mainpath, year, month) 
 }
 
-base_dir <- file.path(main_directory, "data_extracted/", year, monthEnd, "/")
+
+
+############# Step 5 ###################
+base_dir_stations <- file.path(main_directory, "data_extracted", year, monthEnd)
 
 # Function to determine stations from file names
-get_stations <- function(base_dir) {
-  files <- list.files(path = base_dir, recursive = TRUE, pattern = "\\.csv$", full.names = TRUE)
+get_stations <- function(base_dir_stations) {
+  files <- list.files(path = base_dir_stations, recursive = TRUE, pattern = "\\.csv$", full.names = TRUE)
   stations <- unique(str_extract(basename(files), "^[^\\.]+"))
   return(stations)
 }
 
 # List of months
-months <- sprintf("%02d", monthStart:monthEnd)
+months <- as.character(monthStart:monthEnd)
+
+base_dir <- file.path(main_directory, "data_extracted", year)
 
 # Automatically generate list of stations
 stations <- get_stations(base_dir)
+
 
 # Function to read and merge CSV files per station
 process_station <- function(station) {
   station_data <- map_dfr(months, function(month) {
     file_path <- file.path(base_dir, month, paste0(station, ".csv"))
+    # Correct file path to remove month directory
     if (file.exists(file_path)) {
-      read_csv(file_path)
+      data <- read_csv(file_path)
+      # Debugging: Print first few rows of data
+      print(paste("First rows of", file_path))
+      print(head(data))
+      return(data)
     } else {
-      NULL
+      return(NULL)
     }
   })
   
-  actual_data_url <- file.path(main_directory, "data_extracted/", year, paste0(monthStart, "_", monthEnd))
+  actual_data_url <- file.path(main_directory, "data_extracted", year, paste0(year, "_", monthStart, "_", monthEnd))
   if (!dir.exists(actual_data_url)) {
     dir.create(actual_data_url)
     cat("Created empty directory:", actual_data_url, "\n")
   } else {
     cat("Directory already exists:", actual_data_url, "\n")
   }
+  
+  # Debugging: Print station_data before writing
+  print(paste("Data for station", station))
+  print(head(station_data))
+  
   write_csv(station_data, file.path(actual_data_url, paste0(station, ".csv")))
 }
 

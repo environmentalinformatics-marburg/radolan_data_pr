@@ -12,7 +12,7 @@ REM Pfad zu Rscript.exe
 set "rscript_path=C:\Program Files\R\bin\Rscript.exe"
 
 REM R Skript ausfuehren und Fehler in error.log speichern
-"%rscript_path%" "D:\radolan\main.R" "%base_url%" %year% %month% "%output_dir%" %some_value% 2> "%output_dir%\error.log"
+"%rscript_path%" "D:\radolan_data_pr\main.R" "%base_url%" %year% %month% "%output_dir%" %some_value% 2> "%output_dir%\error.log"
 
 endlocal
 exit /b
