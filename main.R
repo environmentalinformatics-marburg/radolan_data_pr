@@ -22,12 +22,8 @@ monthStart <- as.integer(args[5])
 if(monthStart=="" || monthStart == 0) {
   monthStart = 1
 }
-
 if (monthEnd == "" || monthEnd == 0) {
-  # Aktuelles Datum minus 1 Monat berechnen
   monthEnd <- month(Sys.Date()) - 1
-  
-# Wenn das Ergebnis kleiner als 1 ist, setze es auf 12 (für Dezember des Vorjahres)
 if (monthEnd < 1) {
     monthEnd <- 12
 }
@@ -41,7 +37,7 @@ if (monthEnd < 1) {
 
 ############# Step 1 ###################
 # Laden der Funktion aus dem Skript Skript1.R
-source(file.path(main_directory, "00_downloadTheFiles.R"))
+source(file.path(main_directory, "src", "00_downloadTheFiles.R"))
 # Aufrufen der Funktion download_RADOLAN_files mit den Parametern
 # Schleife über die Monate 1 bis 6
 for (month in monthStart:monthEnd) {
@@ -50,14 +46,14 @@ for (month in monthStart:monthEnd) {
 
 ############# Step 2 ###################
 # Aufrufen des zweiten Skripts mit Parametern Skript2.R
-source(file.path(main_directory, "01_extractRadolan.R"))
+source(file.path(main_directory, "src", "01_extractRadolan.R"))
 for (month in monthStart:monthEnd) {
   datapath = main_directory
   process_RADOLAN_data(datapath, year, month)
 }
 ############# Step 3 ###################
 # Aufrufen des zweiten Skripts mit Parametern Skript3.R
-source(file.path(main_directory, "02_combineRadolan.R"))
+source(file.path(main_directory, "src", "02_combineRadolan.R"))
 outpath = main_directory
 for (month in monthStart:monthEnd) {
   combine_RADOLAN_data(outpath, year, month)
@@ -65,15 +61,14 @@ for (month in monthStart:monthEnd) {
 
 ############# Step 4 ###################
 # Aufrufen des zweiten Skripts mit Parametern Skript4.R
-source(file.path(main_directory, "04_reformat_for_DB.R"))
+source(file.path(main_directory, "src", "04_reformat_for_DB.R"))
 mainpath = main_directory
 for (month in monthStart:monthEnd) {
   format_radolan_for_database(mainpath, year, month) 
 }
 
 
-
-base_dir <- file.path("D:/radolan/data_extracted/", year, monthEnd, "/")
+base_dir <- file.path(main_directory, "data_extracted/", year, monthEnd, "/")
 stations <-""
 # Funktion zum Ermitteln der Stationen aus den Dateinamen
 get_stations <- function(base_dir) {
@@ -99,7 +94,7 @@ process_station <- function(station) {
     }
   })
   
-  actual_data_url <- file.path("D:/radolan/data_extracted/", year, paste0(monthStart,"_",monthEnd))
+  actual_data_url <- file.path(main_directory, "data_extracted/", year, paste0(monthStart,"_",monthEnd))
   if (!dir.exists(actual_data_url)) {
     dir.create(actual_data_url)
     cat("Leerer Ordner erstellt:", actual_data_url, "\n")
