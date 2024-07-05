@@ -2,7 +2,7 @@
 
 ### Project Description
 
-This project involves the automation of Radolan data processing using R scripts. It is possible to execute it monthly via Windows Task Scheduler (see the `run_RADOLAN_Win.bat`), or directly with `run_RADOLAN_Win` for Windows and `run_RADOLAN_Lin` for Ubuntu. Please do not forget to edit these run files to provide the actual data for the parameters such as the FTP root directory, year, start month, main directory path and,end month. The goal is to download, extract, combine, and reformat Radolan data for further analysis and storage. Below are the detailed steps involved in the process:
+ It has been modified and extended to automate the processing of Radolan climate data and involves the automation of the data processing using R and bash scripts. It is possible to execute it monthly via Windows Task Scheduler (see the `run_RADOLAN_Win.bat`), or directly with `run_RADOLAN_Win` for Windows and `run_RADOLAN_Lin` for Ubuntu. Please do not forget to edit these run files to provide the actual data for the parameters such as the FTP root directory, year, start month, main directory path and end month. The goal is to download, extract, combine, and reformat Radolan data for further analysis and storage. Below are the detailed steps involved in the process:
 
  ### Steps Involved in the Process
   
@@ -18,7 +18,13 @@ This project involves the automation of Radolan data processing using R scripts.
 
 4. **Reformat Data:**
   - Convert the combined dataset into a suitable format(csv) for further analysis and storage.
-    
+
+
+This project is based on a previous project originally created by Hanna Mayer.
+
+## Original Project
+- **GitHub:** [https://github.com/environmentalinformatics-marburg/magic/tree/master/dfg_spp_exploratories/rainfall_extraction]
+
 ### Author
 
 The original project was created by Hanna Mayer
