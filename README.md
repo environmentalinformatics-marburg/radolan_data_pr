@@ -18,7 +18,7 @@ This project involves the automation of Radolan data processing using R scripts.
 
 4. **Reformat Data:**
   - Convert the combined dataset into a suitable format(csv) for further analysis and storage.
-  - 
+    
 ### Author
 
 The original project was created by Hanna Mayer
