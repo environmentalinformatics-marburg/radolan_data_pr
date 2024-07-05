@@ -1,6 +1,22 @@
-# radolan
-Radolan Data Processing Automation
+# Radolan Data Processing - Automated Processing and Analysis of Climate Data
+
+### Project Description
+
+This project involves the automation of Radolan data processing using R scripts, executed monthly via Windows Task Scheduler with given year, start month, and end month parameters, and in Ubuntu via cronjob.
+
+### Author
+
+The original project was created by Hanna Mayer
+- **GitHub:** [https://github.com/orgs/environmentalinformatics-marburg/people/HannaMeyer](**GitHub:**](https://github.com/orgs/environmentalinformatics-marburg/people/HannaMeyer)
+### Extensions and Improvements
+
+The project was extended and improved by:
+
+- **Name:** Spaska Forteva
+- - **GitHub:** [https://github.com/orgs/environmentalinformatics-marburg/people/sforteva](https://github.com/orgs/environmentalinformatics-marburg/people/sforteva)
+  - 
 This project involves the automation of Radolan data processing using R scripts, executed monthly via Windows Task Scheduler. The goal is to download, extract, combine, and reformat Radolan data for further analysis and storage. Below are the detailed steps involved in the process:
+
 
 1. Downloading Radolan Files
 The script initiates by downloading Radolan files from the DWD FTP server. The download parameters, such as the FTP root directory, year, and main directory path, are provided via command line arguments.
