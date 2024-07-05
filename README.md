@@ -29,6 +29,7 @@ This project is based on a previous project originally created by Hanna Mayer.
 
 The original project was created by Hanna Mayer
 - **GitHub:** [https://github.com/orgs/environmentalinformatics-marburg/people/HannaMeyer] 
+
 ### Extensions and Improvements
 
 The project was extended and improved by:
@@ -36,3 +37,16 @@ The project was extended and improved by:
 - **Name:** Spaska Forteva
 - **GitHub:** [https://github.com/orgs/environmentalinformatics-marburg/people/sforteva] 
 
+
+### Preparations before Running the Scripts
+
+Before starting the scripts, ensure that the following directories exist and are populated with the necessary data:
+
+#### Plots Directory (Shape Files):
+
+This directory should contain shape files (.shp) or other geographical data representing the plots from which data will be extracted.
+
+#### Validation Data Directory (validationData):
+
+This directory should contain pertinent information about the plots, such as metadata, validation criteria, or any additional data required for the validation process.
+These directories are crucial for the scripts to properly execute and process RADOLAN precipitation data. Make sure to update or provide the required information within these directories before running the scripts.
