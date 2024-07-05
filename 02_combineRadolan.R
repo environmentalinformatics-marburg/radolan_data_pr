@@ -4,21 +4,18 @@
 # Description: This function processes historical RADOLAN files stored in .RData format
 #              from a specified directory, converts numerical values to original units,
 #              saves results as CSV and melted data as .RData, and returns a summary of actions taken.
-# Last change: 2024-07-01 Spaska Forteva
+# Last change: 2024-07-05 Spaska Forteva
 
 # Function to process RADOLAN data and generate CSV and melted data
-combine_RADOLAN_data <- function(RadolanPath, outpath) {
+combine_RADOLAN_data <- function(outpath, year, month) {
   # Clear workspace and load required libraries
   rm(list=ls())
   library(reshape2)
-  
-  print(RadolanPath)
-  # Define paths and variables
-  #RadolanPath <- "D:/radolan/results/"
-  #outpath <- "D:/radolan/"
+
+  RadolanPath <- file.path(outpath, "results")
   
   # List all .RData files in RadolanPath
-  files <- list.files(RadolanPath, pattern=".RData$")
+  files <- list.files(RadolanPath, pattern=paste0(year, month,".RData$"))
   setwd(RadolanPath)
   
   # Initialize an empty list to store results
@@ -38,10 +35,10 @@ combine_RADOLAN_data <- function(RadolanPath, outpath) {
   results[, 2:ncol(results)] <- results[, 2:ncol(results)] / 10
   
   # Write results to CSV file
-  write.csv(results, file = paste0(outpath, "Radolan.csv"))
+  write.csv(results, file = file.path(outpath, "Radolan.csv"))
   
   # Read CSV file back into radolan dataframe
-  radolan <- read.csv(paste0(outpath, "Radolan.csv"))
+  radolan <- read.csv(file.path(outpath, "Radolan.csv"))
   
   # Convert Date column to datetime format
   radolan$Date <- strptime(radolan$Date, format = "%Y-%m-%d %H:%M")
@@ -53,7 +50,7 @@ combine_RADOLAN_data <- function(RadolanPath, outpath) {
   radolan <- melt(radolan[, 2:ncol(radolan)], id.vars = c("Date"))
   
   # Save melted data to .RData file
-  save(radolan, file = paste0(outpath, "/radolan_melt.RData"))
+  save(radolan, file = file.path(outpath, paste0(year, month,"_radolan_melt.RData")))
 }
 
 

@@ -2,14 +2,14 @@
 # Author: Hanna Mayer
 # Description: Function to process RADOLAN data
 # The FTP server URL and the output directory are passed as parameters.
-# Last change: 2024-07-01 Spaska Forteva
+# Last change: 2024-07-05 Spaska Forteva
 
 process_RADOLAN_data <- function(datapath, year, month) {
   # Clear workspace and load required libraries
   rm(list=ls())
   library(rgdal)
   library(raster)
-  
+  print(datapath)
   # Define paths for data and results based on datapath
   tmppath <- file.path(datapath, "tmp")
   shppath <- file.path(datapath, "Plots")
@@ -70,9 +70,9 @@ process_RADOLAN_data <- function(datapath, year, month) {
   results$Date <- strptime(substr(files, nchar(files)-16, nchar(files)-4), format="%Y%m%d-%H%M")
   
   # Save results as .RData file
-  save(results, file=file.path(resultpath, paste0("RADOLAN_extracted_", year, ".RData")))
+  save(results, file=file.path(resultpath, paste0("RADOLAN_extracted_", year, month, ".RData")))
   
   # Print completion message
-  print(paste0("Year ", year, " processing complete..."))
+  print(paste0("Year ", year, month, " processing complete..."))
 }
 

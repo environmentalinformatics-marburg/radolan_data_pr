@@ -2,7 +2,7 @@
 # Author: Hanna Mayer
 # Description: This script downloads historical RADOLAN files from an FTP server.
 # The FTP server URL and the output directory are passed as parameters.
-# Last change: 2024-07-01 Spaska Forteva
+# Last change: 2024-07-05 Spaska Forteva
 
 
 download_RADOLAN_files <- function(ftp_root, year, month, out_directory) {
