@@ -22,9 +22,15 @@ monthStart <- as.integer(args[5])
 if(monthStart=="" || monthStart == 0) {
   monthStart = 1
 }
-if(monthEnd=="" || monthEnd == 0) {
-  print("Please write the content for month")
-}  
+
+if (monthEnd == "" || monthEnd == 0) {
+  # Aktuelles Datum minus 1 Monat berechnen
+  monthEnd <- month(Sys.Date()) - 1
+  
+# Wenn das Ergebnis kleiner als 1 ist, setze es auf 12 (für Dezember des Vorjahres)
+if (monthEnd < 1) {
+    monthEnd <- 12
+}
 
 # Definieren der Parameter für den Aufruf der Funktion
 #ftp_root <- "ftp://opendata.dwd.de/climate_environment/CDC/"
